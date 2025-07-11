@@ -2,16 +2,19 @@ let user_id = null;
 let task_id = null;
 let interval;
 let waktu = 30;
-let directLinks = [];
+let directLinks = [
+  "https://flaredishwater.com/jiq9ypg5i?key=288ddd3f725b2187e03fafc5e0b6268d",
+  "https://flaredishwater.com/rzr3yq7eeb?key=0b0ec9a616296fa3520f8f83ff0d9319"
+];
 
 Telegram.WebApp.ready();
 user_id = Telegram.WebApp.initDataUnsafe?.user?.id;
 
-fetch("static/links.json")
-  .then((res) => res.json())
-  .then((data) => {
-    directLinks = data.links || [];
-  });
+
+let directLinks = [
+  "https://flaredishwater.com/jiq9ypg5i?key=288ddd3f725b2187e03fafc5e0b6268d",
+  "https://flaredishwater.com/rzr3yq7eeb?key=0b0ec9a616296fa3520f8f83ff0d9319"
+];
 
 function bukaIklan() {
   if (directLinks.length === 0) {
