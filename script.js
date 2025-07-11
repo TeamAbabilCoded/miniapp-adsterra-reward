@@ -8,24 +8,30 @@ let directLinks = [
   "https://flaredishwater.com/rzr3yq7eeb?key=0b0ec9a616296fa3520f8f83ff0d9319"
 ];
 
-// Tunggu sampai WebApp siap, baru ambil user_id
+// ✅ Cek apakah WebApp tersedia
+console.log("🔧 Cek WebApp:", typeof Telegram, Telegram?.WebApp);
+
+// Tunggu sampai WebApp siap
 Telegram.WebApp.ready(() => {
   console.log("✅ WebApp Loaded");
   console.log("Telegram Data:", Telegram.WebApp.initDataUnsafe);
 
+  // Ambil ID pengguna
   user_id = Telegram.WebApp.initDataUnsafe?.user?.id;
-
   const status = document.getElementById("loadingID");
+
   if (user_id) {
+    console.log("✅ User ID:", user_id);
     if (status) status.innerText = "✅ Siap diklaim!";
   } else {
+    console.warn("⚠️ Gagal memuat user_id");
     if (status) status.innerText = "❌ Gagal memuat ID.";
   }
 });
 
 function mulaiTugas() {
   if (!user_id) {
-    alert("Gagal memuat Telegram WebApp. Coba buka ulang.");
+    alert("Gagal memuat Telegram WebApp. Coba buka ulang melalui bot.");
     return;
   }
 
@@ -37,10 +43,10 @@ function mulaiTugas() {
   // Ambil link acak
   const url = directLinks[Math.floor(Math.random() * directLinks.length)];
 
-  // Buka iklan di jendela browser (tanpa tab baru)
+  // Redirect ke iklan (tanpa tab baru)
   window.location.href = url;
 
-  // Mulai hitung mundur
+  // Hitung mundur
   document.getElementById("klaimStatus").innerHTML = "⏳ Menunggu 30 detik...";
   waktu = 30;
   interval = setInterval(hitunganMundur, 1000);
@@ -79,7 +85,8 @@ function klaimPoin() {
         document.getElementById("klaimStatus").innerHTML = "❌ " + data.message;
       }
     })
-    .catch(() => {
+    .catch((err) => {
+      console.error("❌ Gagal klaim:", err);
       document.getElementById("klaimStatus").innerHTML = "❌ Gagal klaim. Coba lagi.";
     });
 }
