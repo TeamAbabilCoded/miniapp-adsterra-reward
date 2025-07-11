@@ -9,9 +9,6 @@ let directLinks = [
 ];
 
 // Tunggu sampai WebApp siap, baru ambil user_id
-let user_id = null;
-
-// ✅ Debug untuk memastikan WebApp aktif dan user.id tersedia
 Telegram.WebApp.ready(() => {
   console.log("✅ WebApp Loaded");
   console.log("Telegram Data:", Telegram.WebApp.initDataUnsafe);
@@ -40,8 +37,8 @@ function mulaiTugas() {
   // Ambil link acak
   const url = directLinks[Math.floor(Math.random() * directLinks.length)];
 
-  // Buka iklan di tab baru
-  window.open(url, "_blank");
+  // Buka iklan di jendela browser (tanpa tab baru)
+  window.location.href = url;
 
   // Mulai hitung mundur
   document.getElementById("klaimStatus").innerHTML = "⏳ Menunggu 30 detik...";
