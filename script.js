@@ -2,8 +2,19 @@ let directLinks = [];
 let waktu = 30;
 let interval;
 let task_id = "";
+let user_id = "";
 
-// Ambil direct link dari file links.json
+// Ambil user_id dari Telegram WebApp
+window.onload = function () {
+  if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+    const tg = Telegram.WebApp;
+    tg.expand(); // Buka layar penuh
+    user_id = tg.initDataUnsafe?.user?.id || "";
+    console.log("User ID:", user_id);
+  }
+};
+
+// Ambil direct links
 fetch("links.json")
   .then(res => res.json())
   .then(data => {
@@ -13,6 +24,11 @@ fetch("links.json")
 function bukaIklan() {
   if (directLinks.length === 0) {
     alert("Link belum dimuat.");
+    return;
+  }
+
+  if (!user_id) {
+    alert("Gagal mengambil ID pengguna Telegram.");
     return;
   }
 
@@ -37,8 +53,6 @@ function bukaIklan() {
 }
 
 function klaimPoin() {
-  const user_id = "ISI_ID_USER"; // Ganti sesuai sistem Mini App kamu
-
   fetch("https://your-backend-url.com/klaim", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
