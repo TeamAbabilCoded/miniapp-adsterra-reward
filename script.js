@@ -10,10 +10,14 @@ let directLinks = [
 
 // Tunggu sampai WebApp siap, baru ambil user_id
 Telegram.WebApp.ready(() => {
+  console.log("Telegram Data:", Telegram.WebApp.initDataUnsafe); // Tambahkan di sini
+
   user_id = Telegram.WebApp.initDataUnsafe?.user?.id;
   if (user_id) {
     const status = document.getElementById("loadingID");
     if (status) status.innerText = "✅ Siap diklaim!";
+  } else {
+    console.log("❌ user_id tidak ditemukan.");
   }
 });
 
