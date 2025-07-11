@@ -1,49 +1,81 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0faff;
   text-align: center;
-  background: #e0f7fa;
-  margin: 0;
   padding: 20px;
+  margin: 0;
 }
 
-h2 {
-  color: #1a237e;
+.header {
+  margin-bottom: 20px;
 }
 
-.highlight {
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.title span {
   color: #007bff;
 }
 
-.banner img {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 8px;
-  margin-top: 10px;
+.subtitle {
+  font-size: 15px;
+  color: #555;
+  margin-top: 8px;
+}
+
+.banner {
+  margin: 15px auto;
 }
 
 button {
   margin-top: 20px;
-  padding: 15px 30px;
+  padding: 14px 28px;
   font-size: 18px;
-  background-color: #00bcd4;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   color: white;
+  background-color: #007bff;
   cursor: pointer;
+  box-shadow: 0 0 10px #00c6ff;
+  transition: transform 0.2s;
 }
 
 button:hover {
-  background-color: #0097a7;
+  transform: scale(1.05);
+}
+
+/* Animasi pulse */
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 183, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 183, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 183, 255, 0);
+  }
 }
 
 #timerArea {
   margin-top: 20px;
   font-weight: bold;
   color: #333;
+  font-size: 16px;
 }
 
 .kurs {
   margin-top: 30px;
-  color: #555;
-  font-size: 14px;
+  color: #444;
+  font-size: 13px;
 }
