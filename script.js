@@ -7,7 +7,7 @@ let directLinks = [];
 Telegram.WebApp.ready();
 user_id = Telegram.WebApp.initDataUnsafe?.user?.id;
 
-fetch("links.json")
+fetch("static/links.json")
   .then((res) => res.json())
   .then((data) => {
     directLinks = data.links || [];
