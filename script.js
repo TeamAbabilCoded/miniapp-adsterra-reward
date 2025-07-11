@@ -1,24 +1,16 @@
-let directLinks = [];
-let waktu = 30;
+let user_id = null;
+let task_id = null;
 let interval;
-let task_id = "";
-let user_id = "";
+let waktu = 30;
+let directLinks = [];
 
-// Ambil user_id dari Telegram WebApp
-window.onload = function () {
-  if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-    const tg = Telegram.WebApp;
-    tg.expand(); // Buka layar penuh
-    user_id = tg.initDataUnsafe?.user?.id || "";
-    console.log("User ID:", user_id);
-  }
-};
+Telegram.WebApp.ready();
+user_id = Telegram.WebApp.initDataUnsafe?.user?.id;
 
-// Ambil direct links
 fetch("links.json")
-  .then(res => res.json())
-  .then(data => {
-    directLinks = data;
+  .then((res) => res.json())
+  .then((data) => {
+    directLinks = data.links || [];
   });
 
 function bukaIklan() {
@@ -36,8 +28,11 @@ function bukaIklan() {
   const url = directLinks[randomIndex];
   task_id = "task_" + Date.now();
 
-  window.open(url, "_blank");
+  // Ganti: window.open(url, "_blank");
+  // Menjadi: redirect langsung tanpa tab baru
+  window.location.href = url;
 
+  // Countdown tetap berjalan (hanya untuk ilustrasi, karena user pindah halaman)
   waktu = 30;
   document.getElementById("timerArea").innerText = `Tunggu ${waktu} detik...`;
 
@@ -52,17 +47,26 @@ function bukaIklan() {
   }, 1000);
 }
 
-fetch("http://159.89.195.47:8000/klaim", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ user_id, task: task_id })
-})
-  .then(res => res.json())
-  .then(data => {
-    alert("✅ Poin berhasil diklaim!");
-    document.getElementById("timerArea").innerText = "";
+function klaimPoin() {
+  if (!user_id || !task_id) {
+    alert("User ID atau task ID tidak ditemukan.");
+    return;
+  }
+
+  fetch("http://159.89.195.47:8000/klaim", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ user_id, task: task_id }),
   })
-  .catch(err => {
-    alert("❌ Gagal klaim poin.");
-  });
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.status === "ok") {
+        document.getElementById("timerArea").innerText = "✅ Poin berhasil diklaim!";
+      } else {
+        document.getElementById("timerArea").innerText = "❌ " + data.message;
+      }
+    })
+    .catch(() => {
+      document.getElementById("timerArea").innerText = "❌ Gagal klaim poin.";
+    });
 }
