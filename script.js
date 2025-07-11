@@ -52,12 +52,11 @@ function bukaIklan() {
   }, 1000);
 }
 
-function klaimPoin() {
-  fetch("https://your-backend-url.com/klaim", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user_id, task: task_id })
-  })
+fetch("http://159.89.195.47:8000/klaim", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ user_id, task: task_id })
+})
   .then(res => res.json())
   .then(data => {
     alert("✅ Poin berhasil diklaim!");
