@@ -1,83 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Mini App Reward</title>
   <meta charset="UTF-8">
-  <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-    button { padding: 12px 24px; font-size: 18px; margin: 10px; }
-    #klaim { display: none; }
-  </style>
+  <title>Fluxion Faucet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h2>🎯 Kunjungi Iklan & Dapatkan Poin</h2>
-  <button onclick="bukaIklan()">🔗 Buka Iklan</button>
+  <h2>Welcome to <span class="highlight">Fluxion-Faucet</span></h2>
+
+  <!-- Banner Gambar -->
+  <div class="banner">
+    <img src="https://via.placeholder.com/400x300.png?text=Iklan+Utama" alt="Banner Iklan">
+  </div>
+
+  <p>Klik tombol 👇</p>
+
+  <!-- Tombol Iklan -->
+  <button id="watchBtn" onclick="bukaIklan()">✅ TONTON IKLAN</button>
 
   <div id="timerArea"></div>
 
-  <button id="klaim" onclick="klaimPoin()">🎁 Klaim Poin</button>
+  <p class="kurs">Kurs pembayaran saat ini: Rp350 - 750 per 1 iklan</p>
 
-  <!-- 💬 Social Bar -->
-  <script type='text/javascript' src='//flaredishwater.com/d6/ee/fe/d6eefea2f535b46c02c057dd21597917.js'></script>
-
-  <!-- 💥 Popunder -->
-  <script type='text/javascript' src='//flaredishwater.com/bc/fd/a2/bcfda2fb5f7eb2da35f5f49716db5285.js'></script>
-
-  <script>
-    let directLinks = [];
-    let waktu = 30;
-    let interval;
-    let task_id = "";
-
-    // Ambil links.json saat pertama dibuka
-    fetch("links.json")
-      .then(res => res.json())
-      .then(data => {
-        directLinks = data;
-      });
-
-    function bukaIklan() {
-      if (directLinks.length === 0) {
-        alert("Link belum dimuat.");
-        return;
-      }
-
-      const randomIndex = Math.floor(Math.random() * directLinks.length);
-      const url = directLinks[randomIndex];
-      task_id = "task_" + Date.now();
-
-      window.open(url, "_blank");
-
-      waktu = 30;
-      document.getElementById("timerArea").innerText = `Tunggu ${waktu} detik...`;
-      document.getElementById("klaim").style.display = "none";
-
-      clearInterval(interval);
-      interval = setInterval(() => {
-        waktu--;
-        document.getElementById("timerArea").innerText = `Tunggu ${waktu} detik...`;
-        if (waktu <= 0) {
-          clearInterval(interval);
-          document.getElementById("timerArea").innerText = "✅ Siap diklaim!";
-          document.getElementById("klaim").style.display = "inline-block";
-        }
-      }, 1000);
-    }
-
-    function klaimPoin() {
-      const user_id = "ISI_ID_USER"; // ganti jika perlu
-
-      fetch("https://your-backend-url.com/klaim", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id, task: task_id })
-      })
-      .then(res => res.json())
-      .then(data => alert("✅ Poin berhasil diklaim!"))
-      .catch(err => alert("❌ Gagal klaim poin."));
-    }
-  </script>
+  <!-- Script JS -->
+  <script src="script.js"></script>
 
 </body>
 </html>
