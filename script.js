@@ -9,15 +9,20 @@ let directLinks = [
 ];
 
 // Tunggu sampai WebApp siap, baru ambil user_id
+let user_id = null;
+
+// ✅ Debug untuk memastikan WebApp aktif dan user.id tersedia
 Telegram.WebApp.ready(() => {
-  console.log("Telegram Data:", Telegram.WebApp.initDataUnsafe); // Tambahkan di sini
+  console.log("✅ WebApp Loaded");
+  console.log("Telegram Data:", Telegram.WebApp.initDataUnsafe);
 
   user_id = Telegram.WebApp.initDataUnsafe?.user?.id;
+
+  const status = document.getElementById("loadingID");
   if (user_id) {
-    const status = document.getElementById("loadingID");
     if (status) status.innerText = "✅ Siap diklaim!";
   } else {
-    console.log("❌ user_id tidak ditemukan.");
+    if (status) status.innerText = "❌ Gagal memuat ID.";
   }
 });
 
