@@ -2,41 +2,42 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Fluxion Faucet</title>
+  <title>CashClip App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h2>Welcome to <span class="highlight">Fluxion-Faucet</span></h2>
-
-  <!-- Banner Gambar -->
-  <!-- Banner Adsterra Iframe -->
-<div class="banner">
-  <div id="ad-container" style="display: flex; justify-content: center;">
-    <script type="text/javascript">
-      atOptions = {
-        'key' : '20688aa2af689dca4fdeefe9512e8a13',
-        'format' : 'iframe',
-        'height' : 250,
-        'width' : 300,
-        'params' : {}
-      };
-    </script>
-    <script type="text/javascript" src="//flaredishwater.com/20688aa2af689dca4fdeefe9512e8a13/invoke.js"></script>
+  <!-- Header Fancy -->
+  <div class="header">
+    <h1 class="title">Selamat Datang di <span>CashClip</span> 🎉</h1>
+    <p class="subtitle">Dapatkan poin dari menonton iklan & kumpulkan saldo harian!</p>
   </div>
-</div>
 
-  <p>Klik tombol 👇</p>
+  <!-- Banner Adsterra -->
+  <div class="banner">
+    <div id="ad-container" style="display: flex; justify-content: center;">
+      <script type="text/javascript">
+        atOptions = {
+          'key': '20688aa2af689dca4fdeefe9512e8a13',
+          'format': 'iframe',
+          'height': 250,
+          'width': 300,
+          'params': {}
+        };
+      </script>
+      <script type="text/javascript" src="//flaredishwater.com/20688aa2af689dca4fdeefe9512e8a13/invoke.js"></script>
+    </div>
+  </div>
 
-  <!-- Tombol Iklan -->
-  <button id="watchBtn" onclick="bukaIklan()">✅ TONTON IKLAN</button>
-
+  <!-- Tombol dan Timer -->
+  <p>Klik tombol di bawah untuk mulai:</p>
+  <button id="watchBtn" class="pulse" onclick="bukaIklan()">🎁 DAPATKAN POIN</button>
   <div id="timerArea"></div>
 
-  <p class="kurs">Kurs pembayaran saat ini: Rp350 - 750 per 1 iklan</p>
+  <!-- Info kurs -->
+  <p class="kurs">Kurs: Rp600 - Rp900 / Iklan | Tonton iklan valid & klaim poin secara otomatis</p>
 
-  <!-- Script JS -->
   <script src="script.js"></script>
 
 </body>
